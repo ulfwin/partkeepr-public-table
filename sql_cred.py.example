@@ -1,0 +1,4 @@
+sql_host     ="localhost"
+sql_user     ="<sql db user with read rights>"
+sql_passwd   ="<password for above user>"
+sql_database ="PartKeepr"
