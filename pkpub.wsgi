@@ -33,6 +33,9 @@ crsr = db.cursor()
 crsr.execute(f"SELECT category_id,{','.join(cols)} FROM Part")
 tblRaw = crsr.fetchall()
 
+# Convert tuple to list
+tblRaw = [list(e) for e in tblRaw]
+
 # Get categories
 crsr.execute("SELECT categoryPath,id FROM PartCategory")
 tblCat = crsr.fetchall()
@@ -40,11 +43,15 @@ tblCat = crsr.fetchall()
 # Get storage locations
 crsr.execute("SELECT id,name FROM StorageLocation")
 tblLoc = crsr.fetchall()
+
 # Transform list into dictionary
 tblLoc = {r[0]:r[1] for r in tblLoc}
 #print(tblRaw)
 
-
+# Replace location ID with location name
+locid_i = 1+list(cols.keys()).index('storageLocation_id')
+for i in range(len(tblRaw)):
+    tblRaw[i][locid_i] = tblLoc[tblRaw[i][locid_i]]
 
 # html attributes
 htmlAttr = {
