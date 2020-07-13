@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# vim
+*.swp
+
+# Exclude sql credential file with sensitive information
+sql_cred.py
